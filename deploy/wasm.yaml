@@ -1,0 +1,28 @@
+apiVersion: extensions.istio.io/v1alpha1
+kind: WasmPlugin
+metadata:
+  name: wasm
+spec:
+  selector:
+    matchLabels:
+      app: caller
+  url: oci://docker.io/wangdengwu/wasm:v1.0.0
+  sha256: 23784dd0de354be46ef2b7e7b525affac7f2534d07dc447a7e4272cfafa223dc
+  match:
+    - mode: CLIENT
+  pluginConfig:
+    config:
+      name: wdw
+      age : 30
+      array:
+        - test1: 1
+          test2: 2
+          test3: 3
+        - test4: 4
+  vmConfig:
+    env:
+      - name: POD_NAME
+        valueFrom: HOST
+      - name: TRUST_DOMAIN
+        value: "cluster.local"
+  phase: AUTHN

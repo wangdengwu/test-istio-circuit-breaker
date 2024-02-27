@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: caller
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: caller
+  labels:
+    app: caller
+    service: caller
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: caller
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: caller
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: caller
+        version: v1
+    spec:
+      serviceAccountName: caller
+      containers:
+        - image: wangdengwu/caller:v1.0.1
+          imagePullPolicy: IfNotPresent
+          name: caller
+          env:
+            - name: HOST_URL
+              value: http://httpbin:8000
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,4 @@
+.idea/
+.DS_Store
+/wasm-envoy-filter/.idea/
+/wasm-envoy-filter/target/
