@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: caller
   url: oci://docker.io/wangdengwu/wasm:v1.0.0
-  sha256: 23784dd0de354be46ef2b7e7b525affac7f2534d07dc447a7e4272cfafa223dc
+  sha256: 31b1fb19a95806beae6fd944361bce86a392e23de15b0d9a6f5d7e7d659a08c2
   match:
     - mode: CLIENT
   pluginConfig:
